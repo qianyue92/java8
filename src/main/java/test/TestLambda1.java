@@ -82,14 +82,10 @@ public class TestLambda1 {
     // Stream API
     @Test
     public void test4() {
-        pirates.stream()
-                .filter((e) -> e.getAge() < 25)
-                .forEach(System.out::println);
+        pirates.stream().filter((e) -> e.getAge() < 25).forEach(System.out::println);
 
         System.out.println("------------------------------");
 
-        pirates.stream()
-                .filter((e) -> e.getReward() < 20000)
-                .forEach(System.out::println);
+        pirates.stream().filter((e) -> e.getReward() < 20000).forEach(System.out::println);
     }
 }

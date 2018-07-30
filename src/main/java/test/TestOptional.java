@@ -22,7 +22,7 @@ public class TestOptional {
 
     // Optional
     //Entity entity = xxService.select();
-    //String name = Optional.ofNullable(entity.getName).orElse("新人");
+    //String name = Optional.ofNullable(entity.getName()).orElse("新人");
     @Test
     public void test1() {
         String name = Optional.ofNullable(pirate.getName()).orElse("新人");

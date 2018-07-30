@@ -91,16 +91,16 @@ public class TestLambda1 {
     }
 
 
-    // 效率测试
+    // forEach效率测试
     @Test
     public void test5() {
-        for( int t=1;t<5;t++){
-            for(int tt=1;tt<=4;tt++){
+        for( int t = 1; t < 5; t ++) {
+            for(int tt = 1; tt <= 4; tt ++) {
 
                 List<Integer> testList = Arrays.asList(new Integer[(int) Math.pow(100,(t))]);
                 long t1 = System.currentTimeMillis();
                 //1.
-                for(int i=0;i<testList.size();i++){
+                for(int i = 0; i < testList.size(); i ++){
                     Integer b = testList.get(i);
                 }
                 long t2 = System.currentTimeMillis();

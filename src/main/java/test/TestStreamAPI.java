@@ -6,6 +6,9 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
+import java.util.function.Supplier;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -43,17 +46,17 @@ public class TestStreamAPI {
     Stream stream3 = list.stream();
 
     /**
-     * 中间操作
+     * 中间操作:
      * map (mapToInt, flatMap 等)、 filter、 distinct、 sorted、 limit、 skip
      */
     @Test
     public void test1() {
-        pirates.stream().distinct().filter((e) -> e.getAge() < 30).sorted(Comparator.comparing(Pirate::getReward))
+        pirates.stream().distinct().filter(e -> e.getAge() < 30).sorted(Comparator.comparing(Pirate::getReward))
                 .limit(3).skip(1).forEach(System.out::println);
     }
 
     /**
-     * 终止操作
+     * 终止操作:
      * forEach、toArray、 reduce、 collect、 min、 max、 count
      * anyMatch、 allMatch、 noneMatch、 findFirst、 findAny
      */
@@ -74,4 +77,31 @@ public class TestStreamAPI {
             .filter(e -> e.length() > 3)
             .forEach(System.out::println)
             .collect(Collectors.toList());*/
+
+    /**
+     * 自己生成流,无限流
+     * Stream.generate
+     * 通过实现 Supplier 接口，你可以自己来控制流的生成。这种情形通常用于随机数、常量的 Stream，或者需要前后元素间维持着某种状态信息的
+     * Stream。把 Supplier 实例传递给 Stream.generate() 生成的 Stream，默认是串行（相对 parallel 而言）但无序的（相对 ordered 而言）。
+     * 由于它是无限的，在管道中，必须利用 limit 之类的操作限制 Stream 大小。
+     */
+    @Test
+    public void test3() {
+        Random seed = new Random();
+        Supplier<Integer> random = seed::nextInt;
+        Stream.generate(random).limit(10).forEach(System.out::println);
+    }
+
+    /**
+     * Stream.iterate
+     * iterate 跟 reduce 操作很像，接受一个种子值，和一个 UnaryOperator（例如 f）。然后种子值成为 Stream 的第一个元素，f(seed) 为第二个，f(f(seed)) 第三个，以此类推。
+     * 例：生成一个等差数列
+     */
+    @Test
+    public void test4() {
+        Stream.iterate(0, n -> n + 3).limit(10). forEach(x -> System.out.print(x + " "));
+        // 输出：0 3 6 9 12 15 18 21 24 27
+    }
+
+
 }

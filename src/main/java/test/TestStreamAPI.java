@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
-import java.util.stream.IntStream;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -26,7 +26,7 @@ public class TestStreamAPI {
             new Pirate(101, "路飞", 23, 12000.99),
             new Pirate(102, "索隆", 25, 13000.25),
             new Pirate(103, "甚平", 40, 20010.9),
-            new Pirate(104, "乔巴", 15, 8.88),
+            new Pirate(104, "乔巴一号", 15, 8.88),
             new Pirate(104, "乔巴", 15, 8.88),
             new Pirate(105, "娜美", 20, 23333),
             new Pirate(106, "乌索普", 22, 55555)
@@ -47,12 +47,15 @@ public class TestStreamAPI {
 
     /**
      * 中间操作:
-     * map (mapToInt, flatMap 等)、 filter、 distinct、 sorted、 limit、 skip
+     * map (mapToInt, mapToDouble 等)、 filter、 distinct、 sorted、 limit、 skip
      */
     @Test
     public void test1() {
         pirates.stream().distinct().filter(e -> e.getAge() < 30).sorted(Comparator.comparing(Pirate::getReward))
                 .limit(3).skip(1).forEach(System.out::println);
+        // 输出结果：
+        // Pirate(id=101, name=路飞, age=23, reward=12000.99)
+        // Pirate(id=102, name=索隆, age=25, reward=13000.25)
     }
 
     /**
@@ -103,5 +106,29 @@ public class TestStreamAPI {
         // 输出：0 3 6 9 12 15 18 21 24 27
     }
 
+    /**
+     * stream操作举例:
+     * 1.List转Map
+     */
+     @Test
+     public void test5() {
+         System.out.println(pirates.stream().collect(Collectors.toMap(Pirate::getId, e -> e, (k1, k2) -> k1)));
+     }
 
+    /**
+     * 2.分组
+     */
+    @Test
+    public void test6() {
+        System.out.println(pirates.stream().collect(Collectors.groupingBy(Pirate::getAge)));
+    }
+
+    /**
+     * 3.求和
+     */
+    @Test
+    public void test7() {
+        int sum = pirates.stream().mapToInt(Pirate::getAge).sum();
+        //pirates.stream().map(Pirate::getReward).reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 }

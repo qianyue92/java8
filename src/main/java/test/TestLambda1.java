@@ -76,7 +76,7 @@ public class TestLambda1 {
 
         System.out.println("----------------------------");
 
-        List<Pirate> list1 = filterPirate(pirates, (e) -> e.getReward() < 200000);
+        List<Pirate> list1 = filterPirate(pirates, (e) -> e.getReward() < 20000);
         list1.forEach(System.out::println);
     }
 

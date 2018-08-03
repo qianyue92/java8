@@ -17,7 +17,7 @@ public class TestLocalDateTime {
     // DateTimeFormatter:解析和格式化日期时间
     @Test
     public void test2() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm:ss E");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         // localtime->String
         LocalDateTime ldt = LocalDateTime.now();
         String strDate = ldt.format(dtf);
@@ -49,8 +49,6 @@ public class TestLocalDateTime {
 
         Period pe = Period.between(ld2, ld1);
         System.out.println(pe);
-        System.out.println(pe.getMonths());
-        System.out.println(pe.getDays());
     }
 
 }

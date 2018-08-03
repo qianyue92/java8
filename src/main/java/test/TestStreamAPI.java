@@ -47,15 +47,15 @@ public class TestStreamAPI {
 
     /**
      * 中间操作:
-     * map (mapToInt, mapToDouble 等)、 filter、 distinct、 sorted、 limit、 skip
+     * map (mapToInt, mapToDouble 等)、 filter、 distinct、 sorted、 limit、 skip ...
      */
     @Test
     public void test1() {
         pirates.stream().distinct().filter(e -> e.getAge() < 30).sorted(Comparator.comparing(Pirate::getReward))
-                .limit(3).skip(1).forEach(System.out::println);
+                .limit(3).skip(1).map(Pirate::getName).forEach(System.out::println);
         // 输出结果：
-        // Pirate(id=101, name=路飞, age=23, reward=12000.99)
-        // Pirate(id=102, name=索隆, age=25, reward=13000.25)
+        // 乔巴
+        // 路飞
     }
 
     /**
@@ -76,10 +76,13 @@ public class TestStreamAPI {
      }
 
     // 2.对于终止操作，执行后Stream 的元素就被“消费”掉了，你无法对一个 Stream 进行两次终止运算。下面的代码是错误的：
-    /*Stream.of("one", "two", "three", "four")
+    /*@Test
+    public void tests() {
+        Stream.of("one", "two", "three", "four")
             .filter(e -> e.length() > 3)
             .forEach(System.out::println)
-            .collect(Collectors.toList());*/
+            .collect(Collectors.toList());
+    }*/
 
     /**
      * 自己生成流,无限流
@@ -108,7 +111,7 @@ public class TestStreamAPI {
 
     /**
      * stream操作举例:
-     * 1.List转Map
+     * 1.collect  List转Map
      */
      @Test
      public void test5() {
@@ -116,7 +119,7 @@ public class TestStreamAPI {
      }
 
     /**
-     * 2.分组
+     * 2.collect  分组
      */
     @Test
     public void test6() {
@@ -129,6 +132,14 @@ public class TestStreamAPI {
     @Test
     public void test7() {
         int sum = pirates.stream().mapToInt(Pirate::getAge).sum();
+        double sum1 = pirates.stream().mapToDouble(Pirate::getReward).sum();
+        System.out.println(sum);
+        System.out.println(sum1);
         //pirates.stream().map(Pirate::getReward).reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    @Test
+    public void test8() {
+        DefaultTestImpl df = new DefaultTestImpl();
     }
 }

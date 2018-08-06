@@ -4,7 +4,5 @@ package test;
 public interface MyPredicate<T> {
 
 	boolean test(T t);
-
-	//String test2();
 	
 }

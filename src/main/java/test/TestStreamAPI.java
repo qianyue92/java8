@@ -53,9 +53,6 @@ public class TestStreamAPI {
     public void test1() {
         pirates.stream().distinct().filter(e -> e.getAge() < 30).sorted(Comparator.comparing(Pirate::getReward))
                 .limit(3).skip(1).map(Pirate::getName).forEach(System.out::println);
-        // 输出结果：
-        // 乔巴
-        // 路飞
     }
 
     /**
@@ -70,9 +67,6 @@ public class TestStreamAPI {
     public void test2() {
          System.out.println(pirates.stream().filter((e) -> e.getAge() < 30));
          System.out.println(pirates.stream().filter((e) -> e.getAge() < 50).findFirst().get());
-         // 输出结果:
-         // java.util.stream.ReferencePipeline$2@606d8acf
-         // Pirate(id=101, name=路飞, age=23, reward=12000.99)
      }
 
     // 2.对于终止操作，执行后Stream 的元素就被“消费”掉了，你无法对一个 Stream 进行两次终止运算。下面的代码是错误的：
@@ -106,7 +100,6 @@ public class TestStreamAPI {
     @Test
     public void test4() {
         Stream.iterate(0, n -> n + 3).limit(10). forEach(x -> System.out.print(x + " "));
-        // 输出：0 3 6 9 12 15 18 21 24 27
     }
 
     /**
@@ -135,11 +128,5 @@ public class TestStreamAPI {
         double sum1 = pirates.stream().mapToDouble(Pirate::getReward).sum();
         System.out.println(sum);
         System.out.println(sum1);
-        //pirates.stream().map(Pirate::getReward).reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-
-    @Test
-    public void test8() {
-        DefaultTestImpl df = new DefaultTestImpl();
     }
 }

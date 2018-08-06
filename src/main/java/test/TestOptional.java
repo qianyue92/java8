@@ -25,19 +25,16 @@ public class TestOptional {
     @Test
     public void test1() {
         System.out.println(Optional.ofNullable(pirate).map(Pirate::getName).orElse("无名"));
-        //输出："艾斯"
     }
 
     @Test
     public void test3() {
         System.out.println(Optional.ofNullable(x).map(Pirate::getName).orElse("无名"));
-        //输出："无名"
     }
 
     @Test
     public void test4() {
         System.out.println(Optional.ofNullable(p).map(Pirate::getName).orElse("无名"));
-        //输出："无名"
     }
 
     /* 项目中使用情况
